@@ -42,7 +42,7 @@ The lane detection algorithm takes advantage of the observations that left and r
 
 ### 3. Suggest possible improvements to your pipeline
 
-For undetected lanes, a history of previously detected lanes from earlier frame can be maintained and this historical information can be utilized to predict a lane when undetected. 
+For undetected lanes, a history of previously detected lanes from earlier frames can be maintained and this historical information can be utilized to predict a lane when undetected. 
 
 The lane detection algorithm can be tweaked to detect both lanes on one side of the camera image if a lane is not found on one side.
 
