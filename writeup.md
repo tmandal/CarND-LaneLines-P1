@@ -23,14 +23,32 @@ The lane detection algorithm can be described in the following steps.
 * All remaining clusters are finally examined to pick up closer lanes towards middle of the bottom of the image with higher total line segment lengths. Thus left and right lanes are typically found.
 * An option (*identify_lanes.use_history*) is implemented to use lane lines from previous image in case the above algorithm cannot determine left or right lanes.
 
+Here are examples of images captured at each step of this lane detection pipeline.
+
+![alt text][image_gray]
+![alt text][image_blur_gray]
+![alt text][image_canny_edges]
+![alt text][image_hough_lines]
+![alt text][image_lane_detection]
+
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-- Yellow line blending into bright sunlight
-- Both left and right lanes on narrow side of the image
+While working on detecting lanes in challenge.mp4 video, I found out that the left yellow lane was impossible to detect using the above algorithm in the portion of the road where yellow marked lane on off-white road was almost blinded by bright sunlight. Canny edges and hough lines could not appropriately be detected with their parameters tweaked. Below is a capture of such an image. 
+
+![alt text][image_undetected_lane]
+
+The lane detection algorithm takes advantage of the observations that left and right lanes are usually on either side of the camera. If both left and right lanes are somehow captured on narrow side of the image by the camera, then the above may fail to detect both lanes.
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+For undetected lanes, a history of previously detected lanes from earlier frame can be maintained and this historical information can be utilized to predict a lane when undetected. 
 
-Another potential improvement could be to ...
+The lane detection algorithm can be tweaked to detect both lanes on one side of the camera image if a lane is not found on one side.
+
+[image_gray]: examples/gray.png
+[image_blur_gray]: examples/blur_gray.png
+[image_canny_edges]: examples/canny_edges.png
+[image_hough_lines]: examples/hough_lines.png
+[image_lane_detection]: examples/lane_detection.png
+[image_undetected_lane]: examples/undetected_lane.jpg
